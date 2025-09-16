@@ -1,0 +1,9 @@
+body {
+  margin: 0;
+  padding: 40px;
+}
+.gallery {
+  float: left;
+  padding: 12px;
+  cursor: pointer;
+}
