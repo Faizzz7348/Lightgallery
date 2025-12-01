@@ -1,8 +1,9 @@
 const $gallery1 = document.getElementById("gallery-1");
-const gallery1 = window.lightGallery($gallery1, {
-  dynamic: true,
-  plugins: [lgZoom, lgVideo, lgThumbnail],
-  dynamicEl: [
+if ($gallery1) {
+  const gallery1 = window.lightGallery($gallery1, {
+    dynamic: true,
+    plugins: [lgZoom, lgVideo, lgThumbnail],
+    dynamicEl: [
     {
       src:
         "https://images.unsplash.com/photo-1542103749-8ef59b94f47e?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1400&q=80",
@@ -38,8 +39,10 @@ const gallery1 = window.lightGallery($gallery1, {
 $gallery1.addEventListener("click", () => {
   gallery1.openGallery(0);
 });
+}
 
 const $gallery2 = document.getElementById("gallery-2");
+if ($gallery2) {
 const gallery2 = window.lightGallery($gallery2, {
   dynamic: true,
   plugins: [lgZoom, lgVideo, lgThumbnail],
@@ -99,8 +102,10 @@ const gallery2 = window.lightGallery($gallery2, {
 $gallery2.addEventListener("click", () => {
   gallery2.openGallery(0);
 });
+}
 
 const $gallery3 = document.getElementById("gallery-3");
+if ($gallery3) {
 const gallery3 = window.lightGallery($gallery3, {
   dynamic: true,
   plugins: [lgZoom, lgVideo, lgThumbnail],
@@ -149,4 +154,82 @@ const gallery3 = window.lightGallery($gallery3, {
 });
 $gallery3.addEventListener("click", () => {
   gallery3.openGallery(0);
+});
+}
+
+// Page Navigation
+function showSection(sectionId) {
+  // Hide all sections
+  document.querySelectorAll('.content-section').forEach(section => {
+    section.classList.remove('active');
+  });
+  
+  // Show selected section
+  const section = document.getElementById(sectionId);
+  if (section) {
+    section.classList.add('active');
+  }
+  
+  // Update navbar title based on section
+  const navbarTitle = document.querySelector('.navbar-title');
+  const navbarSubtitle = document.querySelector('.navbar-subtitle');
+  
+  if (sectionId === 'gallery-section') {
+    navbarTitle.textContent = 'Gallery';
+    navbarSubtitle.textContent = 'Explore our photo collection';
+  } else if (sectionId === 'music-section') {
+    navbarTitle.textContent = 'Music';
+    navbarSubtitle.textContent = 'Listen to our curated playlists';
+  } else if (sectionId === 'video-section') {
+    navbarTitle.textContent = 'Videos';
+    navbarSubtitle.textContent = 'Watch our featured video content';
+  }
+  
+  // Update active menu item in sidebar
+  document.querySelectorAll('.sidebar-item').forEach(item => {
+    item.classList.remove('active');
+  });
+}
+
+// Sidebar navigation
+document.querySelectorAll('.sidebar-item').forEach(item => {
+  item.addEventListener('click', (e) => {
+    const href = item.getAttribute('href');
+    
+    if (href === '#gallery-1') {
+      e.preventDefault();
+      showSection('gallery-section');
+      item.classList.add('active');
+    } else if (href === '#gallery-2') {
+      e.preventDefault();
+      showSection('music-section');
+      item.classList.add('active');
+    } else if (href === '#gallery-3') {
+      e.preventDefault();
+      showSection('video-section');
+      item.classList.add('active');
+    }
+  });
+});
+
+// Sidebar collapse functionality
+const sidebar = document.querySelector('.sidebar');
+const mainContent = document.querySelector('.main-content');
+
+// Click outside sidebar to collapse
+document.addEventListener('click', (e) => {
+  // Check if click is outside sidebar and not on sidebar itself
+  if (!sidebar.contains(e.target) && !e.target.closest('.sidebar')) {
+    sidebar.classList.add('collapsed');
+    mainContent.classList.add('expanded');
+  }
+});
+
+// Click on sidebar to expand
+sidebar.addEventListener('click', (e) => {
+  if (sidebar.classList.contains('collapsed')) {
+    sidebar.classList.remove('collapsed');
+    mainContent.classList.remove('expanded');
+    e.stopPropagation();
+  }
 });
