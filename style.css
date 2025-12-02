@@ -223,8 +223,8 @@ body {
 /* Gallery Grid */
 .gallery-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 16px;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 12px;
 }
 
 .gallery-card {
@@ -247,7 +247,7 @@ body {
 .gallery-thumbnail {
   position: relative;
   width: 100%;
-  height: 120px;
+  height: 90px;
   overflow: hidden;
   background: #000;
   cursor: pointer;
@@ -302,17 +302,19 @@ body {
 }
 
 .gallery-count {
-  display: inline-block;
-  background: rgba(0, 0, 0, 0.5) !important;
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+  background: rgba(0, 0, 0, 0.85) !important;
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  padding: 3px 10px;
-  border-radius: 10px;
+  padding: 3px 8px;
+  border-radius: 4px;
   font-size: 11px;
-  font-weight: 500;
+  font-weight: 600;
   color: #ffffff !important;
-  margin: 0 12px 12px;
+  z-index: 10;
+  letter-spacing: 0.3px;
 }
 
 /* Music Section */
@@ -487,8 +489,8 @@ body {
 /* Video Section */
 .video-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 16px;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 12px;
 }
 
 .video-card {
@@ -511,7 +513,7 @@ body {
 .video-thumbnail {
   position: relative;
   width: 100%;
-  height: 120px;
+  height: 90px;
   overflow: hidden;
   background: #000;
 }
@@ -564,17 +566,19 @@ body {
 }
 
 .video-duration {
-  display: inline-block;
-  background: rgba(0, 0, 0, 0.5) !important;
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+  background: rgba(0, 0, 0, 0.85) !important;
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  padding: 3px 10px;
-  border-radius: 10px;
+  padding: 3px 8px;
+  border-radius: 4px;
   font-size: 11px;
-  font-weight: 500;
+  font-weight: 600;
   color: #ffffff !important;
-  margin: 0 12px 12px;
+  z-index: 10;
+  letter-spacing: 0.3px;
 }
 
 @media (max-width: 768px) {
