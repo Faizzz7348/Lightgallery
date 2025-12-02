@@ -97,37 +97,37 @@
 <!-- Music Section -->
 <section id="music-section" class="content-section">
   <div class="music-table">
-    <div class="music-row">
+    <div class="music-row" data-audio="DJ_GAM_GAM_PIRI_VERSI_KOPLO_LYRICS_m6KvyFCRy3I_140.mp3">
       <div class="music-number">1</div>
       <div class="music-cover-small">🎵</div>
       <div class="music-info">
-        <h3>Chill Vibes</h3>
-        <p>Relaxing music for work and study</p>
+        <h3>DJ Gam Gam Piri</h3>
+        <p>Versi Koplo Lyrics</p>
       </div>
       <div class="music-duration">3:45</div>
       <button class="play-btn-small">▶</button>
     </div>
-    <div class="music-row">
+    <div class="music-row" data-audio="Loreen - Tattoo (Official Audio) PcCD9n0ZYew_8c420495.mp3">
       <div class="music-number">2</div>
       <div class="music-cover-small">🎸</div>
       <div class="music-info">
-        <h3>Rock Classics</h3>
-        <p>Greatest rock hits of all time</p>
+        <h3>Loreen - Tattoo</h3>
+        <p>Official Audio</p>
       </div>
       <div class="music-duration">4:32</div>
       <button class="play-btn-small">▶</button>
     </div>
-    <div class="music-row">
+    <div class="music-row" data-audio="DJ_GAM_GAM_PIRI_VERSI_KOPLO_LYRICS_m6KvyFCRy3I_140.mp3">
       <div class="music-number">3</div>
       <div class="music-cover-small">🎹</div>
       <div class="music-info">
-        <h3>Jazz Essentials</h3>
-        <p>Smooth jazz for evening moods</p>
+        <h3>Chill Vibes</h3>
+        <p>Relaxing music for work and study</p>
       </div>
       <div class="music-duration">5:18</div>
       <button class="play-btn-small">▶</button>
     </div>
-    <div class="music-row">
+    <div class="music-row" data-audio="Loreen - Tattoo (Official Audio) PcCD9n0ZYew_8c420495.mp3">
       <div class="music-number">4</div>
       <div class="music-cover-small">🎧</div>
       <div class="music-info">
@@ -137,7 +137,7 @@
       <div class="music-duration">3:58</div>
       <button class="play-btn-small">▶</button>
     </div>
-    <div class="music-row">
+    <div class="music-row" data-audio="DJ_GAM_GAM_PIRI_VERSI_KOPLO_LYRICS_m6KvyFCRy3I_140.mp3">
       <div class="music-number">5</div>
       <div class="music-cover-small">🎤</div>
       <div class="music-info">
@@ -147,7 +147,7 @@
       <div class="music-duration">3:22</div>
       <button class="play-btn-small">▶</button>
     </div>
-    <div class="music-row">
+    <div class="music-row" data-audio="Loreen - Tattoo (Official Audio) PcCD9n0ZYew_8c420495.mp3">
       <div class="music-number">6</div>
       <div class="music-cover-small">🎻</div>
       <div class="music-info">
@@ -157,6 +157,32 @@
       <div class="music-duration">6:45</div>
       <button class="play-btn-small">▶</button>
     </div>
+  </div>
+  
+  <!-- Audio Player -->
+  <div class="audio-player" id="audioPlayer">
+    <div class="audio-player-content">
+      <div class="audio-info">
+        <div class="audio-cover">🎵</div>
+        <div class="audio-details">
+          <h4 id="audioTitle">Select a song</h4>
+          <p id="audioArtist">Click play to start</p>
+        </div>
+      </div>
+      <div class="audio-controls">
+        <button class="audio-btn" id="prevBtn">⏮</button>
+        <button class="audio-btn audio-play-btn" id="playPauseBtn">▶</button>
+        <button class="audio-btn" id="nextBtn">⏭</button>
+      </div>
+      <div class="audio-progress">
+        <span id="currentTime">0:00</span>
+        <div class="progress-bar">
+          <div class="progress-fill" id="progressFill"></div>
+        </div>
+        <span id="duration">0:00</span>
+      </div>
+    </div>
+    <audio id="audioElement"></audio>
   </div>
 </section>
 

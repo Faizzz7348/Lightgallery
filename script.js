@@ -157,6 +157,217 @@ $gallery3.addEventListener("click", () => {
 });
 }
 
+// Video Gallery
+const videoCards = document.querySelectorAll('.video-card');
+videoCards.forEach((card, index) => {
+  const videoThumbnail = card.querySelector('.video-thumbnail');
+  if (videoThumbnail) {
+    const videoGallery = window.lightGallery(videoThumbnail, {
+      dynamic: true,
+      plugins: [lgZoom, lgVideo, lgThumbnail],
+      dynamicEl: []
+    });
+    
+    // Add click handler to open video
+    videoThumbnail.addEventListener('click', () => {
+      // Video URLs dengan file awak
+      const videos = [
+        {
+          video: {
+            source: [
+              {
+                src: '-1044805738532567196.mp4',
+                type: 'video/mp4'
+              }
+            ],
+            attributes: {
+              preload: false,
+              controls: true
+            }
+          },
+          thumb: 'https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?w=400&h=225&fit=crop',
+          subHtml: '<div class="lightGallery-captions"><h4>Travel Vlog: Bali</h4><p>Exploring the beautiful island of Bali</p></div>'
+        },
+        {
+          video: {
+            source: [
+              {
+                src: '-1044805738532567196.mp4',
+                type: 'video/mp4'
+              }
+            ],
+            attributes: {
+              preload: false,
+              controls: true
+            }
+          },
+          thumb: 'https://images.unsplash.com/photo-1478720568477-152d9b164e26?w=400&h=225&fit=crop',
+          subHtml: '<div class="lightGallery-captions"><h4>Nature Documentary</h4><p>Wildlife in the Amazon rainforest</p></div>'
+        },
+        {
+          video: {
+            source: [
+              {
+                src: '-1044805738532567196.mp4',
+                type: 'video/mp4'
+              }
+            ],
+            attributes: {
+              preload: false,
+              controls: true
+            }
+          },
+          thumb: 'https://images.unsplash.com/photo-1483366774565-c783b9f70e2c?w=400&h=225&fit=crop',
+          subHtml: '<div class="lightGallery-captions"><h4>City Timelapse</h4><p>24 hours in New York City</p></div>'
+        },
+        {
+          video: {
+            source: [
+              {
+                src: '-1044805738532567196.mp4',
+                type: 'video/mp4'
+              }
+            ],
+            attributes: {
+              preload: false,
+              controls: true
+            }
+          },
+          thumb: 'https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?w=400&h=225&fit=crop',
+          subHtml: '<div class="lightGallery-captions"><h4>Cooking Tutorial</h4><p>How to make perfect pasta</p></div>'
+        }
+      ];
+      
+      videoGallery.updateSlides(videos, index);
+      videoGallery.openGallery(0);
+    });
+  }
+});
+
+// Music Player
+const audioElement = document.getElementById('audioElement');
+const playPauseBtn = document.getElementById('playPauseBtn');
+const prevBtn = document.getElementById('prevBtn');
+const nextBtn = document.getElementById('nextBtn');
+const progressFill = document.getElementById('progressFill');
+const currentTimeEl = document.getElementById('currentTime');
+const durationEl = document.getElementById('duration');
+const audioTitle = document.getElementById('audioTitle');
+const audioArtist = document.getElementById('audioArtist');
+
+let currentTrackIndex = 0;
+let isPlaying = false;
+
+// Get all music rows
+const musicRows = document.querySelectorAll('.music-row');
+const playlist = Array.from(musicRows).map(row => ({
+  src: row.dataset.audio,
+  title: row.querySelector('.music-info h3').textContent,
+  artist: row.querySelector('.music-info p').textContent
+}));
+
+// Load track
+function loadTrack(index) {
+  const track = playlist[index];
+  audioElement.src = track.src;
+  audioTitle.textContent = track.title;
+  audioArtist.textContent = track.artist;
+  
+  // Highlight current track
+  musicRows.forEach((row, i) => {
+    if (i === index) {
+      row.style.background = 'rgba(0, 168, 204, 0.2)';
+      row.querySelector('.play-btn-small').textContent = '⏸';
+    } else {
+      row.style.background = 'rgba(255, 255, 255, 0.05)';
+      row.querySelector('.play-btn-small').textContent = '▶';
+    }
+  });
+}
+
+// Play/Pause
+function togglePlayPause() {
+  if (isPlaying) {
+    audioElement.pause();
+    playPauseBtn.textContent = '▶';
+    musicRows[currentTrackIndex].querySelector('.play-btn-small').textContent = '▶';
+  } else {
+    audioElement.play();
+    playPauseBtn.textContent = '⏸';
+    musicRows[currentTrackIndex].querySelector('.play-btn-small').textContent = '⏸';
+  }
+  isPlaying = !isPlaying;
+}
+
+// Previous track
+function prevTrack() {
+  currentTrackIndex = (currentTrackIndex - 1 + playlist.length) % playlist.length;
+  loadTrack(currentTrackIndex);
+  if (isPlaying) audioElement.play();
+}
+
+// Next track
+function nextTrack() {
+  currentTrackIndex = (currentTrackIndex + 1) % playlist.length;
+  loadTrack(currentTrackIndex);
+  if (isPlaying) audioElement.play();
+}
+
+// Update progress bar
+audioElement.addEventListener('timeupdate', () => {
+  const progress = (audioElement.currentTime / audioElement.duration) * 100;
+  progressFill.style.width = progress + '%';
+  
+  currentTimeEl.textContent = formatTime(audioElement.currentTime);
+  durationEl.textContent = formatTime(audioElement.duration);
+});
+
+// Format time
+function formatTime(seconds) {
+  if (isNaN(seconds)) return '0:00';
+  const mins = Math.floor(seconds / 60);
+  const secs = Math.floor(seconds % 60);
+  return `${mins}:${secs < 10 ? '0' : ''}${secs}`;
+}
+
+// Auto play next track
+audioElement.addEventListener('ended', nextTrack);
+
+// Event listeners
+playPauseBtn.addEventListener('click', togglePlayPause);
+prevBtn.addEventListener('click', prevTrack);
+nextBtn.addEventListener('click', nextTrack);
+
+// Click on music row to play
+musicRows.forEach((row, index) => {
+  row.addEventListener('click', (e) => {
+    if (!e.target.classList.contains('play-btn-small')) {
+      currentTrackIndex = index;
+      loadTrack(index);
+      audioElement.play();
+      isPlaying = true;
+      playPauseBtn.textContent = '⏸';
+    }
+  });
+  
+  // Play button in row
+  row.querySelector('.play-btn-small').addEventListener('click', (e) => {
+    e.stopPropagation();
+    if (currentTrackIndex !== index) {
+      currentTrackIndex = index;
+      loadTrack(index);
+      audioElement.play();
+      isPlaying = true;
+      playPauseBtn.textContent = '⏸';
+    } else {
+      togglePlayPause();
+    }
+  });
+});
+
+// Load first track
+loadTrack(0);
+
 // Page Navigation
 function showSection(sectionId) {
   // Hide all sections
